@@ -1,0 +1,32 @@
+{
+  "name": "danmaku",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node --expose-gc --max-old-space-size=200 ./bin/www",
+    "dev": "nodemon --expose-gc --max-old-space-size=200 ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "~4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "filesize": "^10.0.5",
+    "got": "^11.8.2",
+    "http-errors": "~1.6.3",
+    "moment": "^2.29.4",
+    "morgan": "~1.9.1",
+    "pako": "^1.0.11",
+    "querystring": "^0.2.1",
+    "whacko": "^0.19.1",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "mocha": "^10.1.0",
+    "nodemon": "^2.0.20",
+    "nyc": "^15.1.0"
+  }
+}
