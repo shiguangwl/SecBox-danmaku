@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node --expose-gc --max-old-space-size=200 ./bin/www",
-    "dev": "nodemon --expose-gc --max-old-space-size=200 ./bin/www"
+    "start": "node --expose-gc --max-old-space-size=200 ./app.js"
   },
   "dependencies": {
     "axios": "^1.2.1",

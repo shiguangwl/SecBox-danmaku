@@ -48,4 +48,7 @@ app.use(function (err, req, res) {
 });
 
 
-module.exports = app;
+// 启动监听3000 端口
+app.listen(3000, () => {
+  console.log(`app listening at 3000`)
+})
