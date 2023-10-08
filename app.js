@@ -1,4 +1,3 @@
-const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
@@ -6,7 +5,6 @@ const logger = require("morgan");
 
 // 引入一个个路由模块
 const danmakuRouter = require("./routes/danmaku");
-const DEBUG = process.env.DEBUG === "true" || false;
 
 const app = express();
 
@@ -32,8 +30,8 @@ app.use("/", danmakuRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    res.status(404).send('');
+app.use(function (req, res) {
+	res.status(404).send("");
 });
 
 
@@ -50,5 +48,5 @@ app.use(function (err, req, res) {
 
 // 启动监听3000 端口
 app.listen(3000, () => {
-  console.log(`app listening at 3000`)
-})
+	console.log("app listening at http://127.0.0.1:3000");
+});

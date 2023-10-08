@@ -2,7 +2,6 @@ const axios = require("axios");
 const pako = require("pako");
 const {
 	time_to_second,
-	make_response,
 	content_template,
 } = require("./utils");
 const memory = require("../../utils/memory");
@@ -17,22 +16,24 @@ function Iqiyi() {
 	];
 
 	this.resolve = async (url) => {
-		const res = await axios({
-			method: "get",
-			url: "https://webprox-secbox-shenzhen-yoyghrbxsf.cn-shenzhen.fcapp.run?url=" + url,
-		});
-		const data = res.data;
-		console.log()
-		const result = data.match(/window.Q.PageInfo.playPageInfo=(.*);/);
-		const page_info = JSON.parse(result[1]);
-		// console.log('page_info:', page_info)
+	// 	const res = await axios({
+	// 		method: "get",
+	// 		url: "https://webprox-secbox-shenzhen-yoyghrbxsf.cn-shenzhen.fcapp.run?url=" + url,
+	// 	});
+	// 	const data = res.data;
+	// 	const result = data.match(/window.Q.PageInfo.playPageInfo=(.*);/);
+	// 	const page_info = JSON.parse(result[1]);
+	// 	// console.log('page_info:', page_info)
 
-		const duration = time_to_second(page_info.duration);
+		const page_info = await axios({
+			method: "get",
+			url: "https://service-0tiueo5k-1251388945.gz.apigw.tencentcs.com/proxy/iqy/" + Buffer.from(url, "utf8").toString("hex"),
+		});
 		this.title = page_info.tvName ? page_info.tvName : page_info.name;
 		const albumid = page_info.albumId;
 		const tvid = page_info.tvId.toString();
 		const categoryid = page_info.cid;
-		const page = Math.round(duration / (60 * 5));
+		const page = Math.round(time_to_second(page_info.duration) / (60 * 5));
 		console.log("tvid", tvid);
 		let promises = [];
 		for (let i = 0; i < page; i++) {
@@ -70,9 +71,9 @@ function Iqiyi() {
 		const color = extract(xml, "color");
 		const font = extract(xml, "font");
 
-    // 控制步长，减小内存占用
-    const step = Math.ceil(danmaku.length*length/10000);
-    // console.log(step)
+		// 控制步长，减小内存占用
+		const step = Math.ceil(danmaku.length*length/10000);
+		// console.log(step)
 		for (let i = 0; i < danmaku.length; i+=step) {
 			// console.log(bulletInfo)
 			const content = JSON.parse(JSON.stringify(content_template));

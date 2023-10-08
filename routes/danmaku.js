@@ -11,14 +11,14 @@ const {
 } = require("./api/base");
 const list = [bilibili, mgtv, tencentvideo, youku, iqiyi];
 const memory = require("../utils/memory");
-const rateLimit = require('express-rate-limit');
+const rateLimit = require("express-rate-limit");
 
 // 访问频率限制
-const allowlist = ['::1', '::ffff:127.0.0.1'];
+const allowlist = ["::1", "::ffff:127.0.0.1"];
 const apiLimiter = rateLimit({
 	windowMs: 5 * 60 * 1000, // 5 minute
 	max: 10, // limit each IP to 5 requests per windowMs
-	message: 'Too many requests from this IP, please try again later',
+	message: "Too many requests from this IP, please try again later",
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	skipFailedRequests: true, // Don't count failed requests (status >= 400)
 	skip: (request, response) => allowlist.includes(request.ip),
@@ -89,20 +89,6 @@ router.get("/", apiLimiter, async function (req, res) {
 		else
 			res.render("danmaku-xml",{contents: ret.content});
 	}
-});
-
-router.get("/pageinfo", async function (req, res) {
-//	const promises = [
-//		leancloud.danmakuQuery(leancloud.currentDay()),
-//		leancloud.danmakuQuery(leancloud.lastDay()),
-//		leancloud.danmakuQuery(leancloud.currentMonth())
-//	];
-//	const [today_visited, lastday_visited, month_visited] = await Promise.all(promises);
-//	res.json({
-//		today_visited,
-//		lastday_visited,
-//		month_visited
-//	});
 });
 
 module.exports = router;

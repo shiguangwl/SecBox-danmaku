@@ -30,6 +30,7 @@ function Tencentvideo() {
 		try {
 			res = await axios.get(api_danmaku_base + vid);
 		} catch (e) {
+			console.log("请求发送错误: " + api_danmaku_base + vid,e);
 			if (e.response.status === 404) {
 				this.error_msg = "好像没有弹幕哦";
 				return;
