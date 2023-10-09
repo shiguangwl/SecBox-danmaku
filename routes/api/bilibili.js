@@ -12,6 +12,7 @@ function Bilibili() {
 	];
 
 	this.resolve = async (url) => {
+		this.error_msg = "";
 		// 相关API
 		const api_video_info = "https://api.bilibili.com/x/web-interface/view";
 		const api_epid_cid = "https://api.bilibili.com/pgc/view/web/season";
