@@ -11,18 +11,18 @@ const {
 } = require("./api/base");
 const list = [bilibili, mgtv, tencentvideo, youku, iqiyi];
 const memory = require("../utils/memory");
-const rateLimit = require("express-rate-limit");
+// const rateLimit = require("express-rate-limit");
 
-// 访问频率限制
-const allowlist = ["::1", "::ffff:127.0.0.1"];
-const apiLimiter = rateLimit({
-	windowMs: 5 * 60 * 1000, // 5 minute
-	max: 10, // limit each IP to 5 requests per windowMs
-	message: "Too many requests from this IP, please try again later",
-	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-	skipFailedRequests: true, // Don't count failed requests (status >= 400)
-	skip: (request, response) => allowlist.includes(request.ip),
-});
+// // 访问频率限制
+// const allowlist = ["::1", "::ffff:127.0.0.1"];
+// const apiLimiter = rateLimit({
+// 	windowMs: 5 * 60 * 1000, // 5 minute
+// 	max: 10, // limit each IP to 5 requests per windowMs
+// 	message: "Too many requests from this IP, please try again later",
+// 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+// 	skipFailedRequests: true, // Don't count failed requests (status >= 400)
+// 	skip: (request, response) => allowlist.includes(request.ip),
+// });
 
 async function build_response(url, req) {
 	for (let q = new URLSearchParams(URL.parse(url).query);q.has("url");) {
@@ -61,7 +61,7 @@ async function build_response(url, req) {
 }
 
 /* GET home page. */
-router.get("/", apiLimiter, async function (req, res) {
+router.get("/", async function (req, res) {
 	//检查是否包含URL参数
 	if (!req.query.url) {
 		const urls = [mgtv.example_urls[0], bilibili.example_urls[0], tencentvideo.example_urls[0], youku.example_urls[0], iqiyi.example_urls[0]];

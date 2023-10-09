@@ -13,6 +13,7 @@ function Tencentvideo() {
 	];
 
 	this.resolve = async (url) => {
+		this.error_msg = "";
 		const api_danmaku_base = "https://dm.video.qq.com/barrage/base/";
 		const api_danmaku_segment = "https://dm.video.qq.com/barrage/segment/";
 		const q = urlmodule.parse(url, true);
