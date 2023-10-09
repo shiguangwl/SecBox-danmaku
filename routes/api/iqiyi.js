@@ -19,6 +19,9 @@ function Iqiyi() {
 		const res = await axios({
 			method: "get",
 			url: url,
+			headers: {
+				"Accept-Encoding": "gzip,deflate,compress"
+			}
 		});
 
 		const data = res.data;
