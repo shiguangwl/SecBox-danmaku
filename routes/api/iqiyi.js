@@ -16,19 +16,15 @@ function Iqiyi() {
 	];
 
 	this.resolve = async (url) => {
-	// 	const res = await axios({
-	// 		method: "get",
-	// 		url: "https://webprox-secbox-shenzhen-yoyghrbxsf.cn-shenzhen.fcapp.run?url=" + url,
-	// 	});
-	// 	const data = res.data;
-	// 	const result = data.match(/window.Q.PageInfo.playPageInfo=(.*);/);
-	// 	const page_info = JSON.parse(result[1]);
-	// 	// console.log('page_info:', page_info)
-
-		const page_info = await axios({
+		const res = await axios({
 			method: "get",
-			url: "https://service-0tiueo5k-1251388945.gz.apigw.tencentcs.com/proxy/iqy/" + Buffer.from(url, "utf8").toString("hex"),
+			url: url,
 		});
+
+		const data = res.data;
+		const result = data.match(/window.Q.PageInfo.playPageInfo=(.*);/);
+		const page_info = JSON.parse(result[1]);
+
 		this.title = page_info.tvName ? page_info.tvName : page_info.name;
 		const albumid = page_info.albumId;
 		const tvid = page_info.tvId.toString();
