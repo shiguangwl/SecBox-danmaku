@@ -5,6 +5,8 @@ const logger = require("morgan");
 
 // 引入一个个路由模块
 const danmakuRouter = require("./routes/danmaku");
+const homeRouter = require("./routes/home");
+const vodParseRouter = require("./routes/vodParse");
 
 const app = express();
 
@@ -26,7 +28,9 @@ app.use("/assets", [
 ]);
 
 // 加载路由
-app.use("/", danmakuRouter);
+app.use("/", homeRouter);
+app.use("/danmu.jpg", danmakuRouter);
+app.use("/jx.php", vodParseRouter);
 
 
 // catch 404 and forward to error handler

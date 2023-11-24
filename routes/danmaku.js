@@ -64,12 +64,9 @@ async function build_response(url, req) {
 router.get("/", async function (req, res) {
 	//检查是否包含URL参数
 	if (!req.query.url) {
-		const urls = [mgtv.example_urls[0], bilibili.example_urls[0], tencentvideo.example_urls[0], youku.example_urls[0], iqiyi.example_urls[0]];
-		const path = req.protocol + "://" + req.headers.host + req.originalUrl;
-		res.render("danmaku", {
-			path,
-			urls
-		});
+		// const urls = [mgtv.example_urls[0], bilibili.example_urls[0], tencentvideo.example_urls[0], youku.example_urls[0], iqiyi.example_urls[0]];
+		// const path = req.protocol + "://" + req.headers.host + req.originalUrl;
+		res.render("danmaku");
 	} else {
 		const url = req.query.url;
 		const download = (req.query.download === "on");
